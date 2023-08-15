@@ -1,5 +1,6 @@
 #!/usr/bin/python
-import json, os
+
+import json
 import urllib.request
 import urllib.parse
 from datetime import datetime
@@ -18,47 +19,49 @@ def calculate_weeks(date_string):
     weeks = (current_date - start_date).days // 7
     return weeks
 
-inputAnime = str(input("Anime: "))
+def main():
+	inputAnime = str(input("Anime: "))
+	listAnime = getAnime(inputAnime)
 
-listAnime = getAnime(inputAnime)
+	for i, anime in enumerate(listAnime["data"]):
+		print(f"{str(i+1)}.", anime["title"], "(", anime["type"], ")")
 
-os.system("clear")
-
-for i, anime in enumerate(listAnime["data"]):
-	print(f"{str(i+1)}.", anime["title"], "(", anime["type"], ")")
-
-print("-"*20)
-try:
-	inputAnimeID = int(input("Anime: "))
-except:
 	print("-"*20)
-	print("Input not valid")
-	exit()
+	try:
+		inputAnimeID = int(input("Anime: "))
+	except:
+		print("-"*20)
+		print("Input not valid")
+		exit()
 
-try:
-	i = listAnime["data"][inputAnimeID-1]
-except:
+	try:
+		i = listAnime["data"][inputAnimeID-1]
+	except:
+		print("-"*20)
+		print("Anime not found")
+		exit()
+
+	duration = i["duration"]
+	episodes = i["episodes"]
+
+	if episodes == None:
+		episodes = calculate_weeks(i["aired"]["from"][:10])
+
+	minutes = int(duration[:2])*episodes
+
+	print("\n"*50)
 	print("-"*20)
-	print("Anime not found")
-	exit()
+	print("📛 Title:", i["title"])
+	print("-"*20)
+	print("🔥 Episodes:", episodes)
+	print("⏰ Duration:", duration)
+	print("-"*20)
+	print("=> 😲 Total minutes:", minutes)
+	print("=> 😵 Total hours:", "{:.2f}".format(minutes/60))
+	print("=> 💀 Total days (psycho mode) [24 at day]:", "{:.2f}".format(minutes/1440))
+	print("=> 🫠 Total days (less psycho mode) [6h at day]:", "{:.2f}".format(minutes/1440*4))
+	print("=> 😋 Total days (normal mode) [3h at day]:", "{:.2f}".format(minutes/1440*8))
 
-duration = i["duration"]
-episodes = i["episodes"]
 
-if episodes == None:
-	episodes = calculate_weeks(i["aired"]["from"][:10])
-
-minutes = int(duration[:2])*episodes
-
-os.system("clear")
-print("-"*20)
-print("📛 Title:", i["title"])
-print("-"*20)
-print("🔥 Episodes:", episodes)
-print("⏰ Duration:", duration)
-print("-"*20)
-print("=> 😲 Total minutes:", minutes)
-print("=> 😵 Total hours:", "{:.2f}".format(minutes/60))
-print("=> 💀 Total days (psycho mode) [24 at day]:", "{:.2f}".format(minutes/1440))
-print("=> 🫠 Total days (less psycho mode) [6h at day]:", "{:.2f}".format(minutes/1440*4))
-print("=> 😋 Total days (normal mode) [3h at day]:", "{:.2f}".format(minutes/1440*8))
+if __name__ == '__main__':
+	main()
