@@ -11,6 +11,11 @@ yay -S hmta
 - Fedora
 > Coming soon...
 
+- PIP
+```bash
+pip install hmta
+```
+
 ### Usage
 ```bash
 hmta
