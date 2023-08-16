@@ -25,7 +25,7 @@ A script that helps you find out how much time would take you to watch an anime.
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_bindir}
-install -p -m 755 hmta.py %{buildroot}%{_bindir}/hmta
+install -p -m 755 src/hmta.py %{buildroot}%{_bindir}/hmta
 
 %files
 %{_bindir}/hmta
