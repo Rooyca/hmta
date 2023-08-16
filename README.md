@@ -9,7 +9,10 @@ Do you wanna know how much time would take you to watch an anime? Well, this is 
 yay -S hmta
 ```
 - Fedora
-> Coming soon...
+```bash
+dnf copr enable rooyca/hmta
+dnf install hmta
+```
 
 - PIP
 ```bash
