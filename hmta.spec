@@ -9,7 +9,11 @@ License:        MIT
 Url:            https://github.com/rooyca/hmta
 Source0:        https://github.com/rooyca/hmta/archive/refs/tags/v%{version}.tar.gz
 
-Requires:       python
+BuildRequires: python3-copr
+BuildRequires: python3-copr-common >= %copr_common_version
+
+Requires:   python3-copr
+Requires:   python3-copr-common >= %copr_common_version
 
 %description
 
