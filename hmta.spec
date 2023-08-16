@@ -9,28 +9,27 @@ License:        MIT
 Url:            https://github.com/rooyca/hmta
 Source0:        https://github.com/rooyca/hmta/archive/refs/tags/v%{version}.tar.gz
 
-BuildRequires: python3-copr
-BuildRequires: python3-copr-common >= %copr_common_version
+BuildArch: noarch
 
-Requires:   python3-copr
-Requires:   python3-copr-common >= %copr_common_version
+Requires: python3
 
 %description
-
 A script that helps you find out how much time would take you to watch an anime.
 
-
 %prep
-%autosetup -n %{reponame}-%{version}
+%setup -q
 
+%build
+# Nothing to do here
 
 %install
-mkdir -p %{buildroot}/%{_bindir}
-install -m 0755 %{name} %{buildroot}/%{_bindir}/%{name}
+rm -rf %{buildroot}
+mkdir -p %{buildroot}%{_bindir}
+install -p -m 755 src/hmta.py %{buildroot}%{_bindir}/hmta
 
 %files
-%{_bindir}/%{name}
+%{_bindir}/hmta
 
 %changelog
-* Thu Aug 16 2023 rooyca <rooyca@gmail.com>
-- Initial RPM Release
+* Mon Aug 16 2023 Ronald Cantillo <rooyca@gmail.com>
+- Initial RPM release
