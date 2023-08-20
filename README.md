@@ -2,6 +2,8 @@
 
 Do you wanna know how much time would take you to watch an anime? Well, this is your tool.
 
+![hmta gif](gif/hmta.gif)
+
 ### Installation
 
 - Arch
